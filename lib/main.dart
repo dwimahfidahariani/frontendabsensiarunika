@@ -49,7 +49,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.grey[100],
+      backgroundColor: Colors.grey,
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -58,23 +58,21 @@ class LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                "LOGO",
-                style: TextStyle(
-                  fontSize: 40,
-                  FontWeight: FontWeight.bold,
-                  letterSpacing: 3,
+                  "LOGO",
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                
-              )
+                const SizedBox(height: 10),
+                const Text("tes"),
               ],
-            )
-          )
-        )
-      )
-    )
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
