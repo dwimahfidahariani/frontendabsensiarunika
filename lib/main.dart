@@ -1,4 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LoginPage(),
     );
   }
 }
@@ -45,6 +49,22 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    String username = _usernameController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if (username.isNotEmpty && password.isNotEmpty) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const CheckInPage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Username / Password tidak boleh kosong")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +86,69 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text("tes"),
+                const Text(
+                  "Online Attendance Application",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 5),
+                const Text(
+                  "Login using your company employee account",
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    labelText: "username",
+                    border: UnderlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: "password",
+                    border: UnderlineInputBorder(),
+                  ),
+                ),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      "Forgot Password?",
+                      style: TextStyle(fontSize: 12, color: Colors.blue),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _login,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.black),
+                      elevation: 3,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                    ),
+                    child: const Text(
+                      "LOGIN",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -76,88 +158,174 @@ class LoginPageState extends State<LoginPage> {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class CheckInPage extends StatefulWidget {
+  const CheckInPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CheckInPage> createState() => CheckInPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class CheckInPageState extends State<CheckInPage> {
+  final TextEditingController companyController = TextEditingController(
+    text: "Your Company",
+  );
+  final TextEditingController positionController = TextEditingController(
+    text: "Your Position",
+  );
+  final TextEditingController nameController = TextEditingController(
+    text: "Your Name",
+  );
+  final TextEditingController locationController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
 
-  void _incrementCounter() {
+  late TextEditingController dateController;
+  late TextEditingController timeController;
+
+  @override
+  void initState() {
+    super.initState();
+    DateTime now = DateTime.now();
+
+    String formattedDate = DateFormat('dd/MM/yyyy').format(now);
+    String formattedTime = DateFormat('HH:mm').format(now);
+
+    dateController = TextEditingController(text: formattedDate);
+    timeController = TextEditingController(text: formattedTime);
+
+    _getCurrentLocation();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Location service is disabled")),
+      );
+      return;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return;
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+      ),
+    );
+
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+    String address = "${placemarks.first.street}, ${placemarks.first.locality}";
+
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      locationController.text =
+          "$address (${position.latitude}, ${position.longitude})";
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      appBar: AppBar(title: const Text("Check In")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          children: [
+            TextField(
+              controller: companyController,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Company"),
+            ),
+            TextField(
+              controller: positionController,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Position"),
+            ),
+            TextField(
+              controller: nameController,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Name"),
+            ),
+            TextField(
+              controller: dateController,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Date"),
+            ),
+            TextField(
+              controller: timeController,
+              readOnly: true,
+              decoration: const InputDecoration(labelText: "Time"),
+            ),
+            const SizedBox(height: 20),
+
+            Container(
+              height: 180,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                border: Border.all(color: Colors.black26),
+              ),
+              child: const Center(
+                child: Icon(Icons.location_on, size: 40, color: Colors.red),
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            TextField(
+              controller: locationController,
+              readOnly: true,
+              decoration: const InputDecoration(border: OutlineInputBorder()),
+            ),
+            const SizedBox(height: 20),
+
+            TextField(
+              controller: descController,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                labelText: "Description",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[200],
+                side: const BorderSide(color: Colors.black),
+              ),
+              child: const Text(
+                "Upload File",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+            const SizedBox(height: 30),
+
+            ElevatedButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Check In Success")),
+                );
+              },
+              child: const Text("Check In"),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
