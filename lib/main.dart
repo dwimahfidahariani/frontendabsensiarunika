@@ -204,10 +204,7 @@ class DashboardPage extends StatelessWidget {
   ) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
       },
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -315,89 +312,91 @@ class CheckInPageState extends State<CheckInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Check In")),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: companyController,
-              readOnly: true,
-              decoration: const InputDecoration(labelText: "Company"),
-            ),
-            TextField(
-              controller: positionController,
-              readOnly: true,
-              decoration: const InputDecoration(labelText: "Position"),
-            ),
-            TextField(
-              controller: nameController,
-              readOnly: true,
-              decoration: const InputDecoration(labelText: "Name"),
-            ),
-            TextField(
-              controller: dateController,
-              readOnly: true,
-              decoration: const InputDecoration(labelText: "Date"),
-            ),
-            TextField(
-              controller: timeController,
-              readOnly: true,
-              decoration: const InputDecoration(labelText: "Time"),
-            ),
-            const SizedBox(height: 20),
-
-            Container(
-              height: 180,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                border: Border.all(color: Colors.black26),
+        children: [
+          Column(
+            children: [
+              TextField(
+                controller: companyController,
+                readOnly: true,
+                decoration: const InputDecoration(labelText: "Company"),
               ),
-              child: const Center(
-                child: Icon(Icons.location_on, size: 40, color: Colors.red),
+              TextField(
+                controller: positionController,
+                readOnly: true,
+                decoration: const InputDecoration(labelText: "Position"),
               ),
-            ),
-            const SizedBox(height: 10),
-
-            TextField(
-              controller: locationController,
-              readOnly: true,
-              decoration: const InputDecoration(border: OutlineInputBorder()),
-            ),
-            const SizedBox(height: 20),
-
-            TextField(
-              controller: descController,
-              maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: "Description",
-                border: OutlineInputBorder(),
+              TextField(
+                controller: nameController,
+                readOnly: true,
+                decoration: const InputDecoration(labelText: "Name"),
               ),
-            ),
-            const SizedBox(height: 20),
-
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[200],
-                side: const BorderSide(color: Colors.black),
+              TextField(
+                controller: dateController,
+                readOnly: true,
+                decoration: const InputDecoration(labelText: "Date"),
               ),
-              child: const Text(
-                "Upload File",
-                style: TextStyle(color: Colors.black),
+              TextField(
+                controller: timeController,
+                readOnly: true,
+                decoration: const InputDecoration(labelText: "Time"),
               ),
-            ),
-            const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
-            ElevatedButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Check In Success")),
-                );
-              },
-              child: const Text("Check In"),
-            ),
-          ],
-        ),
+              Container(
+                height: 180,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  border: Border.all(color: Colors.black26),
+                ),
+                child: const Center(
+                  child: Icon(Icons.location_on, size: 40, color: Colors.red),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              TextField(
+                controller: locationController,
+                readOnly: true,
+                decoration: const InputDecoration(border: OutlineInputBorder()),
+              ),
+              const SizedBox(height: 20),
+
+              TextField(
+                controller: descController,
+                maxLines: 3,
+                decoration: const InputDecoration(
+                  labelText: "Description",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[200],
+                  side: const BorderSide(color: Colors.black),
+                ),
+                child: const Text(
+                  "Upload File",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              ElevatedButton(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Check In Success")),
+                  );
+                },
+                child: const Text("Check In"),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -500,8 +499,8 @@ class LeavePageState extends State<LeavePage> {
     );
   }
 }
- 
- class CheckOutPage extends StatefulWidget {
+
+class CheckOutPage extends StatefulWidget {
   const CheckOutPage({super.key});
 
   @override
