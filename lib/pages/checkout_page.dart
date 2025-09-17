@@ -91,17 +91,14 @@ class CheckOutPageState extends State<CheckOutPage> {
             children: [
               TextField(
                 controller: companyController,
-                readOnly: true,
                 decoration: const InputDecoration(labelText: "Company"),
               ),
               TextField(
                 controller: positionController,
-                readOnly: true,
                 decoration: const InputDecoration(labelText: "Position"),
               ),
               TextField(
                 controller: nameController,
-                readOnly: true,
                 decoration: const InputDecoration(labelText: "Name"),
               ),
               TextField(
@@ -130,7 +127,6 @@ class CheckOutPageState extends State<CheckOutPage> {
 
               TextField(
                 controller: locationController,
-                readOnly: true,
                 decoration:
                     const InputDecoration(border: OutlineInputBorder()),
               ),
