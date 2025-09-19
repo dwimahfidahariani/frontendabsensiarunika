@@ -78,6 +78,7 @@ class CheckInPageState extends State<CheckInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFA1BAD2),
       appBar: AppBar(title: const Text("Check In")),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

@@ -9,13 +9,22 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Dashboard")),
+      backgroundColor: const Color(0xFFA1BAD2),
+      appBar: AppBar(
+        title: const Text(
+          "Dashboard",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFFA1BAD2),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
+          crossAxisCount: 3,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
           children: [
             _buildMenuCard(
               context,
@@ -52,18 +61,25 @@ class DashboardPage extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(builder: (context) => page));
       },
       child: Card(
+        color: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
+            mainAxisAlignment:
+                MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 50, color: Colors.blue),
-              const SizedBox(height: 10),
+              Flexible(
+                child: Icon(icon, size: 40, color: Colors.blue),
+              ),
+              const SizedBox(height: 8),
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),
               ),

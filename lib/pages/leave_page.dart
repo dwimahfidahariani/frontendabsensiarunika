@@ -37,6 +37,7 @@ class LeavePageState extends State<LeavePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFA1BAD2),
       appBar: AppBar(title: const Text("Leave Request")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

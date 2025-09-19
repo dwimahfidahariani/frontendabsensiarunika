@@ -31,7 +31,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0x4989C6),
+      backgroundColor: const Color(0xFF4989C6),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -39,23 +39,33 @@ class LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "LOGO",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 3,
-                  ),
-                ),
-                const SizedBox(height: 10),
+    
+                const Text( 
+                  "LOGO", 
+                  style: TextStyle( 
+                    fontSize: 40, 
+                    fontWeight: FontWeight.bold, 
+                    letterSpacing: 3, 
+                    ), 
+                  ), 
+                  const SizedBox(height: 10),
+
                 const Text(
                   "Online Attendance Application",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFDEE0E4),
+                  ),
                 ),
                 const SizedBox(height: 5),
+
                 const Text(
                   "Login using your company employee account",
-                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFFDEE0E4),
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 40),
@@ -63,8 +73,14 @@ class LoginPageState extends State<LoginPage> {
                 TextField(
                   controller: _usernameController,
                   decoration: const InputDecoration(
-                    labelText: "username",
-                    border: UnderlineInputBorder(),
+                    labelText: "Username",
+                    labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFDEE0E4)),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFDEE0E4)),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -73,8 +89,14 @@ class LoginPageState extends State<LoginPage> {
                   controller: _passwordController,
                   obscureText: true,
                   decoration: const InputDecoration(
-                    labelText: "password",
-                    border: UnderlineInputBorder(),
+                    labelText: "Password",
+                    labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFDEE0E4)),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Color(0xFFDEE0E4)),
+                    ),
                   ),
                 ),
 
@@ -84,7 +106,7 @@ class LoginPageState extends State<LoginPage> {
                     onPressed: () {},
                     child: const Text(
                       "Forgot Password?",
-                      style: TextStyle(fontSize: 12, color: Colors.blue),
+                      style: TextStyle(fontSize: 12, color: Color(0xFFDEE0E4)),
                     ),
                   ),
                 ),
