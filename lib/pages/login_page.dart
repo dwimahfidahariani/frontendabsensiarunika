@@ -40,7 +40,7 @@ class LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 
-                Image.asset('assets/images/arunikaaa.png'),
+                Image.asset('assets/images/logo-arunika.png'),
                 // const Text( 
                 //   "LOGO", 
                 //   style: TextStyle( 
