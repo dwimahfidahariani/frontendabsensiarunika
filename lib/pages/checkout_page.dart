@@ -17,8 +17,10 @@ class CheckOutPageState extends State<CheckOutPage> {
       TextEditingController(text: "");
   final TextEditingController nameController =
       TextEditingController(text: "");
-  final TextEditingController locationController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
+  final TextEditingController locationController = 
+      TextEditingController();
+  final TextEditingController descController = 
+      TextEditingController();
 
   late TextEditingController dateController;
   late TextEditingController timeController;
@@ -83,7 +85,7 @@ class CheckOutPageState extends State<CheckOutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFA1BAD2),
+      backgroundColor: const Color(0xFF254669),
       appBar: AppBar(title: const Text("Check Out")),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -92,25 +94,30 @@ class CheckOutPageState extends State<CheckOutPage> {
             children: [
               TextField(
                 controller: companyController,
-                decoration: const InputDecoration(labelText: "Company"),
+                decoration: const InputDecoration(labelText: "Company", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               TextField(
                 controller: positionController,
-                decoration: const InputDecoration(labelText: "Position"),
+                decoration: const InputDecoration(labelText: "Position", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               TextField(
                 controller: nameController,
-                decoration: const InputDecoration(labelText: "Name"),
+                decoration: const InputDecoration(labelText: "Name", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               TextField(
                 controller: dateController,
                 readOnly: true,
-                decoration: const InputDecoration(labelText: "Date"),
+                decoration: const InputDecoration(labelText: "Date", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               TextField(
                 controller: timeController,
                 readOnly: true,
-                decoration: const InputDecoration(labelText: "Time"),
+                decoration: const InputDecoration(labelText: "Time", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               const SizedBox(height: 20),
 
@@ -130,6 +137,7 @@ class CheckOutPageState extends State<CheckOutPage> {
                 controller: locationController,
                 decoration:
                     const InputDecoration(border: OutlineInputBorder()),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               const SizedBox(height: 20),
 
@@ -138,8 +146,10 @@ class CheckOutPageState extends State<CheckOutPage> {
                 maxLines: 3,
                 decoration: const InputDecoration(
                   labelText: "Description",
+                  labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
                   border: OutlineInputBorder(),
                 ),
+                style: TextStyle(color: Color(0xFFDEE0E4)),
               ),
               const SizedBox(height: 20),
 

@@ -9,13 +9,13 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFA1BAD2),
+      backgroundColor: const Color(0xFF254669),
       appBar: AppBar(
         title: const Text(
           "Dashboard",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFFA1BAD2),
+        backgroundColor: const Color(0xFF254669),
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
@@ -72,7 +72,7 @@ class DashboardPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Flexible(
-                child: Icon(icon, size: 40, color: Colors.blue),
+                child: Icon(icon, size: 40, color: Color(0xFF4989C6)),
               ),
               const SizedBox(height: 8),
               Text(

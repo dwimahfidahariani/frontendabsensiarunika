@@ -15,9 +15,12 @@ class LeavePageState extends State<LeavePage> {
       TextEditingController(text: ""); 
   final TextEditingController nameController =
       TextEditingController(text: ""); 
-  final TextEditingController startDateController = TextEditingController();
-  final TextEditingController endDateController = TextEditingController();
-  final TextEditingController reasonController = TextEditingController();
+  final TextEditingController startDateController = 
+      TextEditingController();
+  final TextEditingController endDateController = 
+      TextEditingController();
+  final TextEditingController reasonController = 
+      TextEditingController();
 
   Future<void> _pickDate(TextEditingController controller) async {
     DateTime? picked = await showDatePicker(
@@ -37,7 +40,7 @@ class LeavePageState extends State<LeavePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFA1BAD2),
+      backgroundColor: const Color(0xFF254669),
       appBar: AppBar(title: const Text("Leave Request")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,17 +49,20 @@ class LeavePageState extends State<LeavePage> {
             
             TextField(
               controller: companyController,
-              decoration: const InputDecoration(labelText: "Company"),
+              decoration: const InputDecoration(labelText: "Company", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
             ),
             
             TextField(
               controller: positionController,
-              decoration: const InputDecoration(labelText: "Position"),
+              decoration: const InputDecoration(labelText: "Position", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
             ),
             
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(labelText: "Name"),
+              decoration: const InputDecoration(labelText: "Name", labelStyle: TextStyle(color: Color(0xFFDEE0E4))),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
             ),
             
             TextField(
@@ -64,8 +70,10 @@ class LeavePageState extends State<LeavePage> {
               readOnly: true,
               decoration: const InputDecoration(
                 labelText: "Start Date",
+                labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
                 suffixIcon: Icon(Icons.calendar_today),
               ),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
               onTap: () => _pickDate(startDateController),
             ),
           
@@ -74,15 +82,21 @@ class LeavePageState extends State<LeavePage> {
               readOnly: true,
               decoration: const InputDecoration(
                 labelText: "End Date",
+                labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
                 suffixIcon: Icon(Icons.calendar_today),
               ),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
               onTap: () => _pickDate(endDateController),
             ),
             
             TextField(
               controller: reasonController,
               maxLines: 3,
-              decoration: const InputDecoration(labelText: "Reason"),
+              decoration: const InputDecoration(
+                labelText: "Reason", 
+                labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
+                ),
+              style: TextStyle(color: Color(0xFFDEE0E4)),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
