@@ -39,16 +39,17 @@ class LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-    
-                const Text( 
-                  "LOGO", 
-                  style: TextStyle( 
-                    fontSize: 40, 
-                    fontWeight: FontWeight.bold, 
-                    letterSpacing: 3, 
-                    ), 
-                  ), 
-                  const SizedBox(height: 10),
+                
+                Image.asset('assets/images/logo-arunika.png'),
+                // const Text( 
+                //   "LOGO", 
+                //   style: TextStyle( 
+                //     fontSize: 40, 
+                //     fontWeight: FontWeight.bold, 
+                //     letterSpacing: 3, 
+                //     ), 
+                //   ), 
+                //   const SizedBox(height: 10),
 
                 const Text(
                   "Online Attendance Application",
