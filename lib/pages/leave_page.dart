@@ -71,7 +71,7 @@ class LeavePageState extends State<LeavePage> {
               decoration: const InputDecoration(
                 labelText: "Start Date",
                 labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
-                suffixIcon: Icon(Icons.calendar_today),
+                suffixIcon: Icon(Icons.calendar_today, color: Color(0xFFDEE0E4)),
               ),
               style: TextStyle(color: Color(0xFFDEE0E4)),
               onTap: () => _pickDate(startDateController),
@@ -83,7 +83,7 @@ class LeavePageState extends State<LeavePage> {
               decoration: const InputDecoration(
                 labelText: "End Date",
                 labelStyle: TextStyle(color: Color(0xFFDEE0E4)),
-                suffixIcon: Icon(Icons.calendar_today),
+                suffixIcon: Icon(Icons.calendar_today, color: Color(0xFFDEE0E4)),
               ),
               style: TextStyle(color: Color(0xFFDEE0E4)),
               onTap: () => _pickDate(endDateController),
