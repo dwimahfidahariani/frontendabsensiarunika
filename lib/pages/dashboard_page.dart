@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'checkin_page.dart';
 import 'checkout_page.dart';
 import 'leave_page.dart';
+import 'data_management_page.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -43,6 +44,12 @@ class DashboardPage extends StatelessWidget {
               Icons.event_note,
               "Izin Cuti",
               const LeavePage(),
+            ),
+            _buildMenuCard(
+              context,
+              Icons.event_note,
+              "Data Mgmt",
+              const DataManagementPage(),
             ),
           ],
         ),
