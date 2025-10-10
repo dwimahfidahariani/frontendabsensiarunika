@@ -23,9 +23,9 @@ class _CheckInOutPageState extends State<CheckInOutPage> {
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
 
-  String name = "xxx";
-  String position = "xxx";
-  String company = "xxx";
+  String name = "Hanifa";
+  String position = "Drafter";
+  String company = "Arunika Saha Vikasa";
 
   void _toggleCheckInOut() {
     setState(() {
@@ -73,6 +73,7 @@ class _CheckInOutPageState extends State<CheckInOutPage> {
               final now = DateTime.now();
               lastActivity = type;
               lastTime = DateFormat("dd MMM yyyy • HH:mm").format(now);
+              isCheckedIn = true;
             }
           });
         },
@@ -276,36 +277,42 @@ class _CheckInOutPageState extends State<CheckInOutPage> {
               ),
             ),
 
-            Padding( 
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 6), 
-              child: SizedBox( 
-                width: double.infinity, 
-                child: ElevatedButton( 
-                  onPressed: () async { 
-                    final imagePath = await Navigator.push( 
-                      context, 
-                      MaterialPageRoute(builder: (context) => const CameraPage()), 
-                      ); 
-                      
-                      if (imagePath != null) { 
-                        setState(() { 
-                          _imageFile = File(imagePath); 
-                          lastTime = DateFormat("dd MMM yyyy • HH:mm").format(DateTime.now()); 
-                          }); 
-                        } 
-                         
-                        }, 
-                        style: ElevatedButton.styleFrom( 
-                          backgroundColor: Color(0xFF254669), 
-                          padding: const EdgeInsets.symmetric(vertical: 16), 
-                          ), 
-                          child: const Text( 
-                            "Take Picture", 
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ), 
-                      ), 
-                    ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24.0,
+                vertical: 6,
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final imagePath = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CameraPage(),
+                      ),
+                    );
+
+                    if (imagePath != null) {
+                      setState(() {
+                        _imageFile = File(imagePath);
+                        lastTime = DateFormat(
+                          "dd MMM yyyy • HH:mm",
+                        ).format(DateTime.now());
+                      });
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF254669),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text(
+                    "Take Picture",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
 
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -328,13 +335,14 @@ class _CheckInOutPageState extends State<CheckInOutPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _imageFile == null
-                  ? null
-                  : () {
-                    _toggleCheckInOut();
-                  },
+                  onPressed:
+                      _imageFile == null 
+                          ? null
+                          : () {
+                            _toggleCheckInOut();
+                          },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isCheckedIn ? Colors.red : Colors.green,
+                    backgroundColor: isCheckedIn ? const Color.fromARGB(255, 34, 12, 10) : Colors.green,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   child: Text(
